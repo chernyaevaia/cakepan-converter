@@ -3,7 +3,8 @@
     <v-text-field
       clearable
       label="Height"
-      v-model="heightValue"
+      v-model="dimensions.height"
+      @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-up"
       variant="outlined"
       :rules="[(value) => !!value || 'Required field']"
@@ -11,14 +12,16 @@
     <v-text-field
       clearable
       label="Length"
-      v-model="lengthValue"
+      v-model="dimensions.length"
+      @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-right"
       variant="outlined"
       :rules="[(value) => !!value || 'Required field']"
     ></v-text-field>
     <v-text-field
       clearable
-      v-model="widthValue"
+      v-model="dimensions.width"
+      @input="updateDimensions(dimensions)"
       label="Width"
       prepend-inner-icon="mdi-arrow-left-right"
       variant="outlined"
@@ -28,11 +31,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { defineProps, defineEmits } from "vue";
+const emit = defineEmits();
+const { dimensions } = defineProps(["dimensions"]);
 
-const heightValue = ref("");
-const widthValue = ref("");
-const lengthValue = ref("");
+function updateDimensions(dimensions) {
+  emit("update-rectangle-dimensions", {
+    width: dimensions.width,
+    height: dimensions.height,
+    length: dimensions.length,
+  });
+}
 </script>
 
 <style lang="css" scoped>
