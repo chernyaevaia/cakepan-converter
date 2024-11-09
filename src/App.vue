@@ -12,7 +12,7 @@
       @update-rectangle-dimensions="updateRectangleTarget"
   /></v-container>
   <v-btn color="primary" variant="tonal">Convert</v-btn>
-  <v-btn variant="tonal">Clear All</v-btn>
+  <v-btn variant="tonal" @click="clearAll">Clear All</v-btn>
 </template>
 
 <script setup>
@@ -27,24 +27,26 @@ const rectangleRecipePan = reactive({ width: "", length: "", height: "" });
 const rectangleTargetPan = reactive({ width: "", length: "", height: "" });
 
 function updateCircleRecipe(newValues) {
-  circleRecipePan.diameter = newValues.diameter;
-  circleRecipePan.height = newValues.height;
+  Object.assign(circleRecipePan, newValues);
 }
+
 function updateCircleTarget(newValues) {
-  circleTargetPan.diameter = newValues.diameter;
-  circleTargetPan.height = newValues.height;
+  Object.assign(circleTargetPan, newValues);
 }
 
 function updateRectangleRecipe(newValues) {
-  rectangleRecipePan.width = newValues.width;
-  rectangleRecipePan.height = newValues.height;
-  rectangleRecipePan.length = newValues.length;
+  Object.assign(rectangleRecipePan, newValues);
 }
 
 function updateRectangleTarget(newValues) {
-  rectangleTargetPan.width = newValues.width;
-  rectangleTargetPan.height = newValues.height;
-  rectangleTargetPan.length = newValues.length;
+  Object.assign(rectangleTargetPan, newValues);
+}
+
+function clearAll() {
+  Object.assign(circleRecipePan, { diameter: "", height: "" });
+  Object.assign(circleTargetPan, { diameter: "", height: "" });
+  Object.assign(rectangleRecipePan, { width: "", length: "", height: "" });
+  Object.assign(rectangleTargetPan, { width: "", length: "", height: "" });
 }
 </script>
 
