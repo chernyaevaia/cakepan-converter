@@ -11,7 +11,9 @@
       @update-circle-dimensions="updateCircleTarget"
       @update-rectangle-dimensions="updateRectangleTarget"
   /></v-container>
-  <v-btn color="primary" variant="tonal">Convert</v-btn>
+  <v-btn color="primary" @click="calculateRatios" variant="tonal"
+    >Convert</v-btn
+  >
   <v-btn variant="tonal" @click="clearAll">Clear All</v-btn>
 </template>
 
@@ -47,6 +49,54 @@ function clearAll() {
   Object.assign(circleTargetPan, { diameter: "", height: "" });
   Object.assign(rectangleRecipePan, { width: "", length: "", height: "" });
   Object.assign(rectangleTargetPan, { width: "", length: "", height: "" });
+}
+
+function calculateCircleVolume(circlePan) {
+  const radius = circlePan.diameter / 2;
+  const volume = Math.PI * Math.pow(radius, 2) * circlePan.height;
+  const roundedVolume = Math.round(volume * 10) / 10;
+  return roundedVolume;
+}
+
+function calculateRectangleVolume(rectanglePan) {
+  const volume = rectanglePan.width * rectanglePan.height * rectanglePan.length;
+  const roundedVolume = Math.round(volume * 10) / 10;
+  return roundedVolume;
+}
+
+function calculateRatios() {
+  const isfilledCircleRecipe =
+    circleRecipePan.diameter && circleRecipePan.height;
+  const isfilledCircleTarget =
+    circleTargetPan.diameter && circleTargetPan.height;
+  const isfilledRectangleRecipe =
+    rectangleRecipePan.width &&
+    rectangleRecipePan.length &&
+    rectangleRecipePan.height;
+  const isfilledRectangleTarget =
+    rectangleTargetPan.width &&
+    rectangleTargetPan.length &&
+    rectangleTargetPan.height;
+
+  const circleRecipeVolume = isfilledCircleRecipe
+    ? calculateCircleVolume(circleRecipePan)
+    : 0;
+  const circleTargetVolume = isfilledCircleTarget
+    ? calculateCircleVolume(circleTargetPan)
+    : 0;
+  const rectangleRecipeVolume = isfilledRectangleRecipe
+    ? calculateRectangleVolume(rectangleRecipePan)
+    : 0;
+  const rectangleTargetVolume = isfilledRectangleTarget
+    ? calculateRectangleVolume(rectangleTargetPan)
+    : 0;
+
+  const recipeVolume = circleRecipeVolume || rectangleRecipeVolume;
+  const targetVolume = circleTargetVolume || rectangleTargetVolume;
+
+  const ratio = targetVolume / recipeVolume;
+
+  console.log(ratio);
 }
 </script>
 
