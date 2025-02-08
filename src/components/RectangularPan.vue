@@ -7,7 +7,7 @@
       @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-up"
       variant="outlined"
-      :rules="[(value) => !!value || 'Required field']"
+      :rules="[(value) => !!value.trim() || 'Required field']"
     ></v-text-field>
     <v-text-field
       clearable
@@ -16,7 +16,7 @@
       @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-right"
       variant="outlined"
-      :rules="[(value) => !!value || 'Required field']"
+      :rules="[(value) => !!value.trim() || 'Required field']"
     ></v-text-field>
     <v-text-field
       clearable
@@ -25,7 +25,7 @@
       label="Width"
       prepend-inner-icon="mdi-arrow-left-right"
       variant="outlined"
-      :rules="[(value) => !!value || 'Required field']"
+      :rules="[(value) => !!value.trim() || 'Required field']"
     ></v-text-field>
   </v-container>
 </template>
@@ -47,5 +47,8 @@ function updateDimensions(dimensions) {
 <style lang="css" scoped>
 .container {
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
 }
 </style>

@@ -2,12 +2,12 @@
   <v-container class="container">
     <v-text-field
       clearable
-      label="Width"
+      label="Height"
       v-model="dimensions.diameter"
       @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-left-right"
       variant="outlined"
-      :rules="[(value) => !!value || 'Required field']"
+      :rules="[(value) => !!value.trim() || 'Required field']"
     ></v-text-field>
     <v-text-field
       clearable
@@ -16,7 +16,7 @@
       label="Diameter"
       prepend-inner-icon="mdi-diameter-outline"
       variant="outlined"
-      :rules="[(value) => !!value || 'Required field']"
+      :rules="[(value) => !!value.trim() || 'Required field']"
     ></v-text-field>
   </v-container>
 </template>
@@ -37,5 +37,8 @@ function updateDimensions(dimensions) {
 <style lang="css" scoped>
 .container {
   max-width: 300px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 16px;
 }
 </style>
