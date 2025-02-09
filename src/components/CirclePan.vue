@@ -10,7 +10,6 @@
       :rules="[isValid]"
       type="number"
     ></v-text-field>
-
     <v-text-field
       clearable
       label="Height"

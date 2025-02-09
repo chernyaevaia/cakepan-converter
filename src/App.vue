@@ -97,7 +97,7 @@ const isAllFieldsFilled = computed(() => {
   const isFilled = (shape, pan) => {
     return requiredFields[shape].every((field) => {
       const value = pan[field];
-      return value !== 0 && !isNaN(value);
+      return value !== "0" && value !== "";
     });
   };
 
@@ -171,11 +171,13 @@ function calculateRatios() {
 
 <style lang="css" scoped>
 .main-container {
+  margin-top: 30px;
   display: flex;
   min-height: 430px;
   box-sizing: border-box;
   justify-content: center;
   column-gap: 90px;
+  flex-wrap: wrap;
 }
 
 .button-container {

@@ -45,7 +45,7 @@ function updateDimensions(dimensions) {
     length: dimensions.length,
   });
 }
-const isValid = computed(() => (value) => !!value || "Required field");
+const isValid = computed(() => (value) => !!value && value !=='0' || "Required field");
 </script>
 
 <style lang="css" scoped>
