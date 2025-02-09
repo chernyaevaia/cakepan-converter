@@ -7,7 +7,8 @@
       @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-up"
       variant="outlined"
-      :rules="[(value) => !!value.trim() || 'Required field']"
+      :rules="[isValid]"
+      type="number"
     ></v-text-field>
     <v-text-field
       clearable
@@ -16,7 +17,8 @@
       @input="updateDimensions(dimensions)"
       prepend-inner-icon="mdi-arrow-right"
       variant="outlined"
-      :rules="[(value) => !!value.trim() || 'Required field']"
+      :rules="[isValid]"
+      type="number"
     ></v-text-field>
     <v-text-field
       clearable
@@ -25,13 +27,14 @@
       label="Width"
       prepend-inner-icon="mdi-arrow-left-right"
       variant="outlined"
-      :rules="[(value) => !!value.trim() || 'Required field']"
+      :rules="[isValid]"
+      type="number"
     ></v-text-field>
   </v-container>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
 const emit = defineEmits();
 const { dimensions } = defineProps(["dimensions"]);
 
@@ -42,6 +45,7 @@ function updateDimensions(dimensions) {
     length: dimensions.length,
   });
 }
+const isValid = computed(() => (value) => !!value || "Required field");
 </script>
 
 <style lang="css" scoped>

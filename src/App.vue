@@ -97,7 +97,7 @@ const isAllFieldsFilled = computed(() => {
   const isFilled = (shape, pan) => {
     return requiredFields[shape].every((field) => {
       const value = pan[field];
-      return value?.trim() !== "" && value !== "0";
+      return value !== 0 && !isNaN(value);
     });
   };
 

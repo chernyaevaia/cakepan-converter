@@ -2,27 +2,31 @@
   <v-container class="container">
     <v-text-field
       clearable
-      label="Height"
+      label="Diameter"
       v-model="dimensions.diameter"
       @input="updateDimensions(dimensions)"
-      prepend-inner-icon="mdi-arrow-left-right"
-      variant="outlined"
-      :rules="[(value) => !!value.trim() || 'Required field']"
-    ></v-text-field>
-    <v-text-field
-      clearable
-      v-model="dimensions.height"
-      @input="updateDimensions(dimensions)"
-      label="Diameter"
       prepend-inner-icon="mdi-diameter-outline"
       variant="outlined"
-      :rules="[(value) => !!value.trim() || 'Required field']"
+      :rules="[isValid]"
+      type="number"
+    ></v-text-field>
+
+    <v-text-field
+      clearable
+      label="Height"
+      v-model="dimensions.height"
+      @input="updateDimensions(dimensions)"
+      prepend-inner-icon="mdi-arrow-up-down"
+      variant="outlined"
+      :rules="[isValid]"
+      type="number"
     ></v-text-field>
   </v-container>
 </template>
 
 <script setup>
-import { defineProps, defineEmits } from "vue";
+import { defineProps, defineEmits, computed } from "vue";
+
 const { dimensions } = defineProps(["dimensions"]);
 const emit = defineEmits();
 
@@ -32,6 +36,8 @@ function updateDimensions(dimensions) {
     height: dimensions.height,
   });
 }
+
+const isValid = computed(() => (value) => !!value || "Required field");
 </script>
 
 <style lang="css" scoped>
@@ -42,3 +48,4 @@ function updateDimensions(dimensions) {
   row-gap: 16px;
 }
 </style>
+
